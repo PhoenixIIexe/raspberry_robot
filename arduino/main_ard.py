@@ -8,6 +8,7 @@ GPIO.setmode(GPIO.BCM)
 pin1_d = 18
 pin1_sp = 17
 pin2_d = 22
+
 pin2_sp = 27
 
 GPIO.setup(pin1_d, GPIO.OUT)
