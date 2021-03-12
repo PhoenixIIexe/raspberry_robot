@@ -34,11 +34,15 @@ def line(m1, m2):
     elif sensor()['line'] == -1:
         go(m1, 0.35*m2)
 #---------------------------------------------------------------------#
-
+""""
 temp = round(time())
 while round(time()) - temp < 20:
     line(30, 30)
-    
+"""
+temp = round(time())
+while round(time()) - temp < 20:
+    go(30, 30)
+
 motor1.stop()
 motor2.stop()
 GPIO.cleanup()
