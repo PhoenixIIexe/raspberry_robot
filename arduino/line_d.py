@@ -29,7 +29,7 @@ def sensor():
 
     for i in contours[1][5:-5]:
         x = i[0][0]
-        if abs(200 - x) < 65 :
+        if abs(200 - x) < 100 :
             if distortions != [] and normal.count(x) == 1:
                 distortions.append(x)
                 distortions_y = i[0][1]
