@@ -61,9 +61,9 @@ def sensor():
         elif min(normal) > 200:
             sensor_d['line'] = 1
         else:
-            if (max(normal)+min(normal))/2 - 200 < -5:
+            if (max(normal)+min(normal))/2 - 200 < -20:
                 sensor_d['line'] = -1
-            elif (max(normal)+min(normal))/2 - 200 > 5:
+            elif (max(normal)+min(normal))/2 - 200 > 20:
                 sensor_d['line'] = 1
             else:
                 sensor_d['line'] = 0
