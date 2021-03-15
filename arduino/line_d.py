@@ -39,7 +39,7 @@ def sensor():
         else:
             distortions.append(x)
             distortions_y = i[0][1]
-
+    print(normal, distortions)
     try:         
         if abs(max(normal) - max(distortions)) > 20 and abs(min(normal) - min(distortions)) < 20:
             if abs(distortions_y - normal_y) > 20:
