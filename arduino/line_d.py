@@ -13,8 +13,8 @@ sensor_d = {
 }
 
 def sensor():
-    distortions = []
-    normal = []
+    distortions = [200]
+    normal = [200]
     normal_y, distortions_y = 0, 0
     sensor_d['cr'] = 101
 
