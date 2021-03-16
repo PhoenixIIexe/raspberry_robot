@@ -19,6 +19,7 @@ thresh = cv.inRange(hsv, hsv_min, hsv_max)
 
 contours, hierarchy = cv.findContours( thresh.copy(), cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)
 m_line = contours[1][7][0][0]
+print(m_line)
 
 
 def sensor():
@@ -36,7 +37,7 @@ def sensor():
     
     contours, hierarchy = cv.findContours( thresh.copy(), cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)
 
-    for i in contours[1][5:-5]:
+    for i in contours[1]:
         x = i[0][0]
         if abs(m_line - x) < 100 :
             if distortions != [] and normal.count(x) == 1:
