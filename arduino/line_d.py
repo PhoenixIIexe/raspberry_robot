@@ -68,5 +68,5 @@ def sensor():
             else:
                 sensor_d['line'] = 0
     
-        
+    print(sensor_d)
     return sensor_d
