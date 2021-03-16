@@ -18,7 +18,7 @@ hsv = cv.cvtColor(img, cv.COLOR_BGR2HSV)
 thresh = cv.inRange(hsv, hsv_min, hsv_max)
 
 contours, hierarchy = cv.findContours( thresh.copy(), cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)
-m_line = contours[7][0][0]
+m_line = contours[1][7][0][0]
 
 
 def sensor():
