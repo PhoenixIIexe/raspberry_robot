@@ -12,6 +12,15 @@ sensor_d = {
     'cr': 0
 }
 
+
+img = cv.warpAffine(cv.VideoCapture(0).read()[1], cv.getRotationMatrix2D((320, 240), 180, 1.0), (640, 480))[360: 480, 120: 520]
+hsv = cv.cvtColor(img, cv.COLOR_BGR2HSV)
+thresh = cv.inRange(hsv, hsv_min, hsv_max)
+
+contours, hierarchy = cv.findContours( thresh.copy(), cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)
+m_line = contours[7][0][0]
+
+
 def sensor():
     distortions = []
     normal = []
@@ -29,7 +38,7 @@ def sensor():
 
     for i in contours[1][5:-5]:
         x = i[0][0]
-        if abs(200 - x) < 100 :
+        if abs(m_line - x) < 100 :
             if distortions != [] and normal.count(x) == 1:
                 distortions.append(x)
                 distortions_y = i[0][1]
@@ -56,14 +65,14 @@ def sensor():
     except:
         pass
     finally:
-        if max(normal if normal != [] else distortions) < 200:
+        if max(normal if normal != [] else distortions) < m_line:
             sensor_d['line'] = -1
-        elif min(normal if normal != [] else distortions) > 200:
+        elif min(normal if normal != [] else distortions) > m_line:
             sensor_d['line'] = 1
         else:
-            if (max(normal)+min(normal))/2 - 200 < -20:
+            if (max(normal)+min(normal))/2 - m_line < -20:
                 sensor_d['line'] = -1
-            elif (max(normal)+min(normal))/2 - 200 > 20:
+            elif (max(normal)+min(normal))/2 - m_line > 20:
                 sensor_d['line'] = 1
             else:
                 sensor_d['line'] = 0
