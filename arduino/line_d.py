@@ -66,14 +66,15 @@ def sensor():
     except:
         pass
     finally:
-        if max(normal if normal != [] else distortions) < m_line:
+        sensor = normal if normal != [] else distortions
+        if max(sensor) < m_line:
             sensor_d['line'] = -1
-        elif min(normal if normal != [] else distortions) > m_line:
+        elif min(sensor) > m_line:
             sensor_d['line'] = 1
         else:
-            if (max(normal)+min(normal))/2 - m_line < -20:
+            if (max(sensor)+min(sensor))/2 - m_line < -20:
                 sensor_d['line'] = -1
-            elif (max(normal)+min(normal))/2 - m_line > 20:
+            elif (max(sensor)+min(sensor))/2 - m_line > 20:
                 sensor_d['line'] = 1
             else:
                 sensor_d['line'] = 0
