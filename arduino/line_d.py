@@ -13,8 +13,8 @@ sensor_d = {
 }
 
 def sensor():
-    distortions = [200]
-    normal = [200]
+    distortions = []
+    normal = []
     normal_y, distortions_y = 0, 0
     sensor_d['cr'] = 101
 
@@ -56,9 +56,9 @@ def sensor():
     except:
         pass
     finally:
-        if max(normal) < 200:
+        if max(normal if normal != [] else distortions) < 200:
             sensor_d['line'] = -1
-        elif min(normal) > 200:
+        elif min(normal if normal != [] else distortions) > 200:
             sensor_d['line'] = 1
         else:
             if (max(normal)+min(normal))/2 - 200 < -20:
