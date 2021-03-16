@@ -40,7 +40,9 @@ while round(time()) - temp < 20:
     line(50, 50)
 """
 
-go(50, 25)
+temp = round(time())
+while round(time()) - temp < 20:
+    go(50, 25)
 
 
 motor1.stop()
