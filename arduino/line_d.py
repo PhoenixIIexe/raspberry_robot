@@ -24,7 +24,7 @@ white_d = True
 
 
 def sensor():
-    local white_d
+    global white_d
     distortions = []
     normal = []
     normal_y, distortions_y = 0, 0
