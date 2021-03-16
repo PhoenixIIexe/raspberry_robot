@@ -20,11 +20,9 @@ thresh = cv.inRange(hsv, hsv_min, hsv_max)
 contours, hierarchy = cv.findContours( thresh.copy(), cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)
 m_line = contours[1][7][0][0]
 print(m_line)
-white_d = True
 
 
 def sensor():
-    global white_d
     distortions = []
     normal = []
     normal_y, distortions_y = 0, 0
@@ -81,14 +79,8 @@ def sensor():
                   sensor_d['line'] = 1
               else:
                   sensor_d['line'] = 0
-      white_d = True
     except:
-      if white_d:
-        if sensor_d['line'] == 1:
-          sensor_d['line'] = -1
-        else:
-          sensor_d['line'] = 1
-        white_d = False
+      pass
 
     print(sensor_d)
     return sensor_d
