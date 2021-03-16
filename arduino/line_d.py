@@ -24,6 +24,7 @@ white_d = True
 
 
 def sensor():
+    local white_d
     distortions = []
     normal = []
     normal_y, distortions_y = 0, 0
@@ -82,7 +83,7 @@ def sensor():
                   sensor_d['line'] = 0
       white_d = True
     except:
-      if white_d == True:
+      if white_d:
         if sensor_d['line'] == 1:
           sensor_d['line'] = -1
         else:
