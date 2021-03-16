@@ -82,7 +82,7 @@ def sensor():
                   sensor_d['line'] = 0
       white_d = True
     except:
-      if white_d:
+      if white_d == True:
         if sensor_d['line'] == 1:
           sensor_d['line'] = -1
         else:
