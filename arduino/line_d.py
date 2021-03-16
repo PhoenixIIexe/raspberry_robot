@@ -37,47 +37,53 @@ def sensor():
     
     contours, hierarchy = cv.findContours( thresh.copy(), cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)
 
-    for i in contours[1]:
-        x = i[0][0]
-        if abs(m_line - x) < 100 :
-            if distortions != [] and normal.count(x) == 1:
-                distortions.append(x)
-                distortions_y = i[0][1]
-            else:
-                normal.append(x)
-                normal_y = i[0][1]
-        else:
-            distortions.append(x)
-            distortions_y = i[0][1]
-    print(normal, distortions)
-    try:         
-        if abs(max(normal) - max(distortions)) > 20 and abs(min(normal) - min(distortions)) < 20:
-            if abs(distortions_y - normal_y) > 20:
-                sensor_d['cr'] = 2
-            else:
-                sensor_d['cr'] = 1
-        elif abs(max(normal) - max(distortions)) < 20 and abs(min(normal) - min(distortions)) > 20:
-            if abs(distortions_y - normal_y) > 20:
-                sensor_d['cr'] = -2
-            else:
-                sensor_d['cr'] = -1
-        elif abs(max(normal) - max(distortions)) > 20 and abs(min(normal) - min(distortions)) > 20:
-            sensor_d['cr'] = 0
+    try:
+      for i in contours[1]:
+          x = i[0][0]
+          if abs(m_line - x) < 100 :
+              if distortions != [] and normal.count(x) == 1:
+                  distortions.append(x)
+                  distortions_y = i[0][1]
+              else:
+                  normal.append(x)
+                  normal_y = i[0][1]
+          else:
+              distortions.append(x)
+              distortions_y = i[0][1]
+      print(normal, distortions)
+      try:         
+          if abs(max(normal) - max(distortions)) > 20 and abs(min(normal) - min(distortions)) < 20:
+              if abs(distortions_y - normal_y) > 20:
+                  sensor_d['cr'] = 2
+              else:
+                  sensor_d['cr'] = 1
+          elif abs(max(normal) - max(distortions)) < 20 and abs(min(normal) - min(distortions)) > 20:
+              if abs(distortions_y - normal_y) > 20:
+                  sensor_d['cr'] = -2
+              else:
+                  sensor_d['cr'] = -1
+          elif abs(max(normal) - max(distortions)) > 20 and abs(min(normal) - min(distortions)) > 20:
+              sensor_d['cr'] = 0
+      except:
+          pass
+      finally:
+          sensor = normal if normal != [] else distortions
+          if max(sensor) < m_line:
+              sensor_d['line'] = -1
+          elif min(sensor) > m_line:
+              sensor_d['line'] = 1
+          else:
+              if (max(sensor)+min(sensor))/2 - m_line < -20:
+                  sensor_d['line'] = -1
+              elif (max(sensor)+min(sensor))/2 - m_line > 20:
+                  sensor_d['line'] = 1
+              else:
+                  sensor_d['line'] = 0
     except:
-        pass
-    finally:
-        sensor = normal if normal != [] else distortions
-        if max(sensor) < m_line:
-            sensor_d['line'] = -1
-        elif min(sensor) > m_line:
-            sensor_d['line'] = 1
-        else:
-            if (max(sensor)+min(sensor))/2 - m_line < -20:
-                sensor_d['line'] = -1
-            elif (max(sensor)+min(sensor))/2 - m_line > 20:
-                sensor_d['line'] = 1
-            else:
-                sensor_d['line'] = 0
-    
+      if sensor_d['line'] == 1:
+        sensor_d['line'] = -1
+      else:
+        sensor_d['line'] = 1
+
     print(sensor_d)
     return sensor_d
