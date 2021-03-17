@@ -29,9 +29,9 @@ def go(m1, m2):
 def line(m1, m2):
     if sensor()['line'] == 0:
         go(m1, m2)
-    elif sensor()['line'] == -1:
-        go(0.5*m1, m2)
     elif sensor()['line'] == 1:
+        go(0.5*m1, m2)
+    elif sensor()['line'] == -1:
         go(m1, 0.5*m2)
 #---------------------------------------------------------------------#
 
