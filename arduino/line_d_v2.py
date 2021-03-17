@@ -15,7 +15,7 @@ sensor_d = {
 def sensor():
     img = cv.warpAffine(cv.VideoCapture(0).read()[1], cv.getRotationMatrix2D((320, 240), 180, 1.0), (640, 480))
     img = img[360: 480, 120: 520]
-    
+
     sensor_d['cr'] = 101
     normal_y, distortions_y, distortions_r, distortions_l = [1000, 0, 0, 0]
 
@@ -24,7 +24,7 @@ def sensor():
 
     contours, hierarchy = cv.findContours( thresh.copy(), cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)
 
-    if contours[1] != []:
+    try:
       default = contours[1][-3][0][0] - contours[1][-4][0][0]
       for i in range(4, len(contours[1])//2):
 
@@ -63,6 +63,9 @@ def sensor():
 
       if sensor_d['cr'] in [-1, 1] and abs(distortions_y - normal_y) > 20:
           sensor_d['cr'] = -2 if sensor_d['cr'] == -1 else 2
+    except:
+      pass
 
+      
     print(sensor_d)
     return sensor_d
