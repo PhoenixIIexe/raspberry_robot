@@ -27,12 +27,13 @@ def go(m1, m2):
 
 #---------------------------------------------------------------------#
 def line(m1, m2):
-    if sensor()['line'] == 0:
-        go(m1, m2)
-    elif sensor()['line'] == -1:
-        go(0.7*m1, m2)
-    elif sensor()['line'] == 1:
-        go(m1, 0.7*m2)
+  
+  if sensor()['line'] == 0:
+      go(m1, m2)
+  elif sensor()['line'] == -1:
+      go(0.7*m1 if sensor()['cr'] not in [-2, 2] else 0.35*m1, m2)
+  elif sensor()['line'] == 1:
+      go(m1, 0.7*m2 if sensor()['cr'] not in [-2, 2] else 0.35*m2)
 #---------------------------------------------------------------------#
 
 temp = round(time())
