@@ -13,9 +13,9 @@ sensor_d = {
 }
 
 def sensor():
-    #img = cv.imread(fn)[0+50: cv.imread(fn).shape[1]-50, 0+50: cv.imread(fn).shape[0]-70]
-    img = cv.imread('ard_2.png')
-    # img = cv.VideoCapture(0).read()[1]
+    img = cv.warpAffine(cv.VideoCapture(0).read()[1], cv.getRotationMatrix2D((320, 240), 180, 1.0), (640, 480))
+    img = img[360: 480, 120: 520]
+    
     sensor_d['cr'] = 101
     normal_y, distortions_y, distortions_r, distortions_l = [1000, 0, 0, 0]
 
