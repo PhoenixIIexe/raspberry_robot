@@ -1,6 +1,6 @@
 import RPi.GPIO as GPIO
 from time import sleep, time
-from line_d import sensor
+from line_d_v2 import sensor
 import cv2
 
 GPIO.setmode(GPIO.BCM)
