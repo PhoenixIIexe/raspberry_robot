@@ -29,15 +29,15 @@ def go(m1, m2):
 def line(m1, m2):
     if sensor()['line'] == 0:
         go(m1, m2)
-    elif sensor()['line'] == 1:
-        go(0.5*m1, m2)
     elif sensor()['line'] == -1:
-        go(m1, 0.5*m2)
+        go(0.7*m1, m2)
+    elif sensor()['line'] == 1:
+        go(m1, 0.7*m2)
 #---------------------------------------------------------------------#
 
 temp = round(time())
 while round(time()) - temp < 20:
-    line(50, 50)
+    line(30, 30)
 
 
 motor1.stop()
